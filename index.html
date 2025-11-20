@@ -1,578 +1,327 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elena Fernández García - Homepage</title>
-    
-    <!-- External Resources -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&family=Handlee&display=swap" rel="stylesheet">
-    
-    
-    <style>
-        /* CSS Variables */
-        :root {
-            --primary-color: #663399;
-            --secondary-color: #8a2be2;
-            --accent-color: #ffd700;
-            --background-color: #ffffff;
-            --text-color: #000000;
-        }
-
-        /* Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        
-        /* Base Styles */
-        body {
-            font-family: 'Raleway', sans-serif;
-            font-weight: 300;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--background-color);
-            position: relative;
-        }
-        
-        
-                /* Navigation with Icons */
-        nav {
-            background-color: white;
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .nav-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        nav a {
-            font-family: 'Raleway', sans-serif;
-            color: black; /* Color del texto de Home a negro */
-            text-decoration: none;
-            font-size: 1.1rem;
-            padding: 0.5rem 1rem;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: normal;
-            border-radius: 4px;
-            position: relative;
-        }
-
-        nav a:hover {
-            font-weight: bold;
-            color: black(--secondary-color);
-            transform: translateY(-2px);
-        }
-
-
-        nav a:hover::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url('yellow-painting-marks.png'); /* Ruta de la imagen */
-            background-size: cover;
-            background-position: center;
-            opacity: 0.6; /* Opacidad para hacerla visible detrás del texto */
-            border-radius: 4px;
-            z-index: -1; /* Para que la imagen quede detrás del texto */
-            transition: opacity 0.3s ease;
-        }
-
-        nav a i {
-            font-size: 1.2rem;
-        }
-
-
-	/* Add these icons to your HTML navbar */
-	.nav-container a::before {
-		font-family: "Font Awesome 5 Free";
-		font-weight: 900;
-	}
-
-	.nav-container a[href*="academic-cv"]::before {
-		content: "\f015"; /* Home icon */
-	}
-
-	.nav-container a[href*="research"]::before {
-		content: "\f19d"; /* This is the galaxy/spiral icon */
-		/* OR */
-		/* content: "\f753"; */ /* This is the meteor icon */
-		/* OR */
-		/* content: "\f186"; */ /* This is the moon icon */
-	}
-
-	.nav-container a[href*="publications"]::before {
-		content: "\f02d"; /* Publications/book icon */
-	}
-
-	.nav-container a[href*="CV"]::before {
-		content: "\f15c"; /* CV/users icon */
-	}
-
-
-        header {
-            padding: 6rem 0 4rem 0;
-            background-color: white;
-        }
-        
-        
-        
-        .profile-container {
-            display: flex;
-            align-items: center;
-            gap: 3rem;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-	.profile-image-container {
-		position: relative;
-		width: 200px;
-		height: 200px;
-		flex-shrink: 0;
-		cursor: pointer;
-		z-index: 1;
-		transition: all 0.5s ease;
-		transform-style: preserve-3d; /* Necesario para aplicar la rotación 3D */
-	}
-
-
-	.profile-image-container:hover {
-		animation: rotateAndZoom 1s forwards; /* Ajusta el tiempo a 3s para dos rotaciones completas */
-		z-index: 3;
-	}
-
-	.profile-image {
-		width: 100%;
-		height: 100%;
-		border-radius: 50%;
-		object-fit: cover;
-		border: 3px solid var(--primary-color);
-		transition: all 0.5s ease;
-		filter: brightness(1);
-	}
-
-	.profile-image-container:hover .profile-image {
-		transform: scale(1.05);
-		box-shadow: 0 0 30px rgba(102, 51, 153, 0.4);
-		filter: brightness(1.1);
-        }
-
-	.profile-image-container::after {
-            content: '';
-            position: absolute;
-            top: -3px;
-            left: -3px;
-            right: -3px;
-            bottom: -3px;
-            border-radius: 50%;
-            border: 3px solid transparent;
-            border-top-color: var(--accent-color);
-            animation: spin 1s linear infinite;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .profile-image-container:hover::after {
-            opacity: 1;
-        }
-        
-
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
-        }
-        
-        
-        /* Animación de rotación doble y zoom */
-	@keyframes rotateAndZoom {
-		0% {
-			transform: rotateY(0deg); /* Comienza sin rotación */
-		}
-		50% {
-			transform: rotateY(180deg); /* Medio giro */
-		}
-		100% {
-			transform: rotateY(360deg) scale(1); /* Vuelve a la posición original */
-		}
-	}
-
-
-        .name-container {
-            margin-bottom: 0.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-
-
-        .first-name {
-            font-weight: 1000;
-            font-size: 2.8rem;
-            
-        }
-
-        .last-name {
-            font-style: italic;
-            font-size: 2.8rem;
-            font-weight: 300;
-        }
-
-        .title {
-            font-size: 1rem;
-            color: black(--primary-color);
-            margin-bottom: 0.3rem;
-        }
-        
-        
-        .about-me-title {
-		font-family: 'Handlee', cursive;
-		text-align: center;
-		font-size: 2rem; /* Adjust size as needed */
-		margin-bottom: 1rem; /* Add spacing below */
-		color: var(--primary-color); /* Use primary color for consistency */
-	}
-   
-        
-        .text-container {
-            flex-grow: 1;
-            transition: all 0.5s ease;
-        }
-
-        .profile-container:hover .text-container {
-            transform: translateX(30px);
-        }
-
-
-        .name-container:hover {
-            transform: translateY(-2px);
-            text-shadow: 2px 2px 4px rgba(102, 51, 153, 0.3);
-        }
-
-        .institution {
-            font-size: 1rem;
-            font-style: italic;
-            color: black(--primary-color);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .institution:hover {
-            color: black(--secondary-color);
-        }
-        
-        
-        /* Add this to your CSS styles */
-	.highlight {
-		color: var(--primary-color);
-		font-weight: bold;
-		transition: all 0.5s ease;
-	}
-
-
-
-
-        section {
-            background: white;
-            padding: 2rem;
-            margin: 2rem auto;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: all 0.5s ease;
-            position: relative;
-            z-index: 1;
-            max-width: 800px; /* Added max-width */
-            width: 100%; /* Added to maintain responsiveness */
-        }
-
-
-
-        section p {
-            transition: all 0.1s ease;
-        }
-
-
-
-        section::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.1);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            pointer-events: none;
-            border-radius: 8px;
-        }
-
-        section:hover::after {
-            opacity: 1;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin-top: 2rem;
-            padding: 1rem;
-        }
-
-        .social-link {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-size: 2rem;
-            width: 70px;
-            height: 70px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            background: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .social-link:hover {
-            color: white;
-            background-color: var(--primary-color);
-            transform: translateY(-8px) rotate(360deg) scale(1.1);
-            box-shadow: 0 8px 20px rgba(102, 51, 153, 0.4);
-        }
-
-        .social-link:hover i {
-            animation: pulse 1s infinite;
-        }
-
-        @media (max-width: 768px) {
-            .profile-container {
-                flex-direction: column;
-                text-align: center;
-                gap: 1.5rem;
-            }
-            
-            .profile-image-container {
-                width: 200px;
-                height: 200px;
-            }
-
-            .text-container {
-                text-align: center;
-            }
-
-            header {
-                padding: 5rem 0 2rem 0;
-            }
-
-            .nav-container {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 1rem;
-            }
-        }
-        
-        @keyframes blink-color {
-		0% { color: var(--primary-color); }
-		50% { color: var(--accent-color); }
-		100% { color: var(--primary-color); }
-	}
-        
-        @keyframes slideIn {
-		0% {
-			transform: scaleX(0);
-			transform-origin: right;
-		}
-		100% {
-			transform: scaleX(1);
-			transform-origin: right;
-		}
-	}
-
-	@keyframes slideOut {
-		0% {
-			transform: scaleX(1);
-			transform-origin: left;
-		}
-		100% {
-			transform: scaleX(0);
-			transform-origin: left;
-		}
-	}
-
-
-/* Keyword container and boxes */
-    .keyword-container {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 2rem;
-    }
-
-    .keyword-box {
-        background-color: #fff;
-        padding: 1rem;
-        border-radius: 8px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        width: 30%;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        transition: all 0.3s ease;
-    }
-
-    .keyword-box:hover {
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-        transform: translateY(-5px);
-    }
-
-    .keyword-symbol {
-        font-size: 2rem;
-        color: #663399; /* Purple */
-    }
-
-    .keyword-text {
-        font-size: 1.1rem;
-        color: #000; /* Black */
-    }
-
-    @media (max-width: 768px) {
-        .keyword-container {
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .keyword-box {
-            width: 100%;
-        }
-    }
-
-        
-    </style>
-    
-    
-    
-    
-	<!-- Google tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-HRQKJX94KG"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
- 		gtag('js', new Date());
-
- 		gtag('config', 'G-HRQKJX94KG');
-	</script>
-
-    
+    <title>Elena Fernandez Garcia | Cosmology PhD Student</title>
+    <meta name="description"
+        content="Portfolio of Elena Fernandez Garcia, PhD student in Cosmology, DESI collaboration member, researcher in cosmic voids and N-body simulations.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 
-
-
 <body>
-    <nav>
-        <div class="nav-container">
-            <a href="index.html">Home</a>
-            <a href="research.html">Experience</a>
-            <a href="publications.html">Publications</a>
-            <a href="CV.html">CV</a>
-        </div>
+    <canvas id="cosmos-bg"></canvas>
+
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="#hero" class="nav-link" data-section="hero">Home</a></li>
+            <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+            <li><a href="#timeline" class="nav-link" data-section="timeline">Trajectory</a></li>
+            <li><a href="#publications" class="nav-link" data-section="publications">Publications</a></li>
+            <li><a href="#skills" class="nav-link" data-section="skills">Skills</a></li>
+            <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
+        </ul>
     </nav>
 
-    <header>
-        <div class="profile-container">
-            <div class="profile-image-container">
-                <img src="elena.jpeg" alt="Elena Fernández García" class="profile-image">
-            </div>
-            <div class="text-container">
-                <div class="name-container">
-                    <span class="first-name">Elena</span>
-                    <span class="last-name">Fernández García</span>
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="hero-content">
+                <h1>Elena <strong>Fernández García</strong></h1>
+                <h2 class="subtitle">PhD Student in Cosmology</h2>
+                <p class="tagline">📍Granada, Spain</p>
+                <div class="hero-buttons">
+                    <a href="#publications" class="btn primary-btn">Explore Research</a>
+                    <a href="#contact" class="btn secondary-btn">Get in Touch</a>
                 </div>
-                <div class="title">PhD Candidate in Cosmology</div>
-                <a href="https://www.iaa.es/" target="_blank" class="institution">Instituto de Astrofísica de Andalucía (IAA-CSIC)</a>
-    <p><strong>Email:</strong> <a href="mailto:efdez@iaa.es" style="color: #663399; text-decoration: none; font-style: italic; transition: color 0.3s ease;" onmouseover="this.style.color='#FFD700'" onmouseout="this.style.color='#663399'">efdez@iaa.es</a></p>
             </div>
-        </div>
-    <hr style="border: none; height: 1px; background-color: #e0e0e0; margin: 2rem 0;">
-    </header>
+        </section>
 
-    <section>
-    <h2 class="about-me-title">About me</h2>
-    <p>
-        I am a second-year PhD candidate at the 
-        <span class="highlight">Instituto de Astrofísica de Andalucía</span> (IAA-CSIC), 
-        where I focus on understanding the fundamental nature of our universe through various cosmological approaches. 
-        My research combines theoretical work on <span class="highlight">cosmic voids</span>, 
-        <span class="highlight">conformal models</span>, and <span class="highlight">numerical simulations</span>.
-    </p>
-    <br>
-    <p>
-        As a member of the <span class="highlight">DESI</span> collaboration, I contribute to advancing our understanding of 
-        dark energy through extensive simulation work. My expertise lies in applying the <span class="highlight">SHAM</span> method 
-        to the <span class="highlight">Uchuu</span> simulation, helping bridge the gap between theoretical models and observational data.
-    </p>
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-content">
+                    <div class="about-image">
+                        <img src="elena.jpeg" alt="Elena Fernandez Garcia" class="profile-img">
+                    </div>
+                    <div class="about-text">
+                        <p>I am a PhD student in Cosmology at the Instituto de Astrofísica de Andalucía (IAA-CSIC),
+                            working within the DESI collaboration. My research focuses on understanding the large-scale
+                            structure of the Universe.</p>
+                        <p>I specialize in analyzing <strong>Cosmic Voids</strong> and running <strong>N-body
+                                Simulations</strong>. I am particularly interested in populating these simulations with
+                            galaxies using the <strong>SHAM (Subhalo Abundance Matching)</strong> method and exploring
+                            <strong>Conformal Transformations</strong> of the standard metric to test alternative
+                            cosmological models.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- New Keyword Boxes -->
-    <div class="keyword-container">
-        <div class="keyword-box">
-            <span class="keyword-symbol">•</span>
-            <span class="keyword-text">Cosmic Voids</span>
-        </div>
-        <div class="keyword-box">
-            <span class="keyword-symbol">•</span>
-            <span class="keyword-text">Conformal Models</span>
-        </div>
-        <div class="keyword-box">
-            <span class="keyword-symbol">•</span>
-            <span class="keyword-text">Numerical Simulations</span>
-        </div>
-    </div>
-</section>
+        <!-- Academic Trajectory (Timeline) -->
+        <section id="timeline" class="section">
+            <div class="container">
+                <h2 class="section-title">Academic Trajectory</h2>
+                <div class="timeline">
+                    <!-- PhD -->
+                    <div class="timeline-item">
+                        <div class="timeline-date">2023 - 2027</div>
+                        <div class="timeline-content">
+                            <h3>PhD in Cosmology</h3>
+                            <p class="institution">IAA-CSIC, Granada, Spain</p>
+                            <p>Researching cosmic voids and N-body simulations within the DESI collaboration.</p>
+                        </div>
+                    </div>
+                    <!-- Master -->
+                    <div class="timeline-item">
+                        <div class="timeline-date">2022 - 2023</div>
+                        <div class="timeline-content">
+                            <h3>MSc in Physics: Astrophysics & Particle Physics</h3>
+                            <p class="institution">University of Granada (UGR), Spain</p>
+                            <p>Specialized coursework in advanced astrophysics and particle physics.</p>
+                        </div>
+                    </div>
+                    <!-- Bachelor -->
+                    <div class="timeline-item">
+                        <div class="timeline-date">2018 - 2022</div>
+                        <div class="timeline-content">
+                            <h3>Bachelor's Degree in Physics</h3>
+                            <p class="institution">University of Granada (UGR), Spain</p>
+                            <p>Foundation in theoretical and experimental physics.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <!-- Publications Section -->
+        <section id="publications" class="section">
+            <div class="container">
+                <h2 class="section-title">Publications</h2>
+                <div class="publications-list-dynamic">
+
+                    <!-- Paper 1 -->
+                    <article class="pub-item"
+                        onclick="window.open('https://ui.adsabs.harvard.edu/abs/2025A&A...695A..19F', '_blank')">
+                        <div class="pub-year">2025</div>
+                        <div class="pub-details">
+                            <h3>Constraining cosmological parameters using void statistics from the SDSS survey</h3>
+                            <div class="pub-meta">
+                                <span class="pub-journal">A&A</span>
+                                <span class="authors"><strong>E. Fernández-García<strong> et al.</span>
+                                <span class="read-more">📄</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Paper 2 -->
+                    <article class="pub-item"
+                        onclick="window.open('https://ui.adsabs.harvard.edu/abs/2025A&A...701A.237F', '_blank')">
+                        <div class="pub-year">2025</div>
+                        <div class="pub-details">
+                            <h3>Missing components in ΛCDM from DESI Y1 BAO measurements: Insights from redshift
+                                remapping</h3>
+                            <div class="pub-meta">
+                                <span class="pub-journal">A&A</span>
+                                <span class="authors"><strong>E. Fernández-García<strong> et al.</span>
+                                <span class="read-more">📄</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Paper 3 -->
+                    <article class="pub-item"
+                        onclick="window.open('https://ui.adsabs.harvard.edu/abs/2025arXiv250701593F', '_blank')">
+                        <div class="pub-year">2025</div>
+                        <div class="pub-details">
+                            <h3>DESI DR2 reference mocks: clustering results from Uchuu-BGS and LRG</h3>
+                            <div class="pub-meta">
+                                <span class="pub-journal">arXiv</span>
+                                <span class="authors"><strong>E. Fernández-García<strong> et al.</span>
+                                <span class="read-more">📄</span>
+
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Paper 4 -->
+                    <article class="pub-item"
+                        onclick="window.open('https://ui.adsabs.harvard.edu/abs/2025arXiv250314745D', '_blank')">
+                        <div class="pub-year">2025</div>
+                        <div class="pub-details">
+                            <h3>Data Release 1 of the Dark Energy Spectroscopic Instrument</h3>
+                            <div class="pub-meta">
+                                <span class="pub-journal">arXiv</span>
+                                <span class="authors">DESI Collaboration (incl. <strong>E. Fernández-García<strong>)</span>
+                                <span class="read-more">📄</span>
+                            </div>
+                        </div>
+
+                    </article>
+
+                    <!-- Paper 5 -->
+                    <article class="pub-item"
+                        onclick="window.open('https://ui.adsabs.harvard.edu/abs/2025arXiv250314742A', '_blank')">
+                        <div class="pub-year">2025</div>
+                        <div class="pub-details">
+                            <h3>Validation of the DESI DR2 Measurements of BAO from Galaxies and Quasars</h3>
+                            <div class="pub-meta">
+                                <span class="pub-journal">arXiv</span>
+                                <span class="authors">DESI Collaboration (incl. <strong>E. Fernández-García<strong>)</span>
+                                <span class="read-more">📄</span>
+                            </div>
+                        </div>
+
+                    </article>
+
+                    <!-- Paper 6 -->
+                    <article class="pub-item"
+                        onclick="window.open('https://ui.adsabs.harvard.edu/abs/2025arXiv250314738D', '_blank')">
+                        <div class="pub-year">2025</div>
+                        <div class="pub-details">
+                            <h3>DESI DR2 Results II: Measurements of BAO and Cosmological Constraints</h3>
+                            <div class="pub-meta">
+                                <span class="pub-journal">arXiv</span>
+                                <span class="authors">DESI Collaboration (incl. <strong>E. Fernández-García<strong>)</span>
+                                <span class="read-more">📄</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Paper 7 -->
+                    <article class="pub-item"
+                        onclick="window.open('https://ui.adsabs.harvard.edu/abs/2025arXiv250809133S', '_blank')">
+                        <div class="pub-year">2025</div>
+                        <div class="pub-details">
+                            <h3>Measurement of Parity-Violating Modes of the DESI Y1 LRG 4-Point Correlation Function
+                            </h3>
+                            <div class="pub-meta">
+                                <span class="pub-journal">arXiv</span>
+                                <span class="authors">Z. Slepian et al. (incl. <strong>E. Fernández-García<strong>)</span>
+                                <span class="read-more">📄</span>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section">
+            <div class="container">
+                <h2 class="section-title">Technical Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-icon">📊</div>
+                        <h3>SBI</h3>
+                        <p>Simulation-Based Inference</p>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon">🎲</div>
+                        <h3>MCMC</h3>
+                        <p>Markov Chain Monte Carlo</p>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon">🕸️</div>
+                        <h3>NestedSamplers</h3>
+                        <p>Bayesian Inference Tools</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div style="height: 10px;"></div>
+
+
+            <div class="container">
+                <div class="skills-grid">
+                    <!-- TensorFlow -->
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Tensorflow_logo.svg"
+                                 alt="TensorFlow logo" width="40">
+                        </div>
+                        <h3>TensorFlow</h3>
+                        <p>TensorFlow</p>
+                    </div>
+            
+                    <!-- PyTorch -->
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/1/10/PyTorch_logo_icon.svg"
+                                 alt="PyTorch logo" width="40">
+                        </div>
+                        <h3>PyTorch</h3>
+                        <p>PyTorch</p>
+                    </div>
+            
+                    <!-- scikit-learn -->
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg"
+                                 alt="scikit-learn logo" width="40">
+                        </div>
+                        <h3>scikit-learn</h3>
+                        <p>scikit-learn</p>
+                    </div>
+            
+                </div>
+            </div>
+            
     
-    
-    
+        </section>
 
-    <div class="social-links">
-        <a href="https://scholar.google.es/citations?user=Zg9FdwYAAAAJ&hl=es" target="_blank" class="social-link" title="Google Scholar">
-            <i class="fas fa-graduation-cap"></i>
-        </a>
-        <a href="https://github.com/elenaferga" target="_blank" class="social-link" title="GitHub">
-            <i class="fab fa-github"></i>
-        </a>
-        <a href="https://orcid.org/0009-0006-2125-9590" target="_blank" class="social-link" title="ORCID">
-            <i class="fab fa-orcid"></i>
-        </a>
-    </div>
- 
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="section-title">Contact</h2>
+                <p class="contact-intro">Interested in my research or collaboration? Feel free to reach out.</p>
+                <div class="contact-links">
+                    <a href="mailto:efdez@iaa.es" class="contact-item">
+                        <span class="icon">✉️</span> efdez@iaa.es
+                    </a>
+                    <a href="https://www.linkedin.com/in/elena-fernández-garcía-207aa3190/" class="contact-item">
+                        <span class="icon">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
+                                 alt="LinkedIn icon" width="22">
+                        </span>
+                        LinkedIn
+                    </a>
+                    
+                    </a>
+                    <a href="https://github.com/elenaferga" class="contact-item">
+                        <span class="icon">
+                            <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+                                 alt="GitHub icon" width="22">
+                        </span>
+                        GitHub
+                    </a>
+                    
+                    <a href="https://scholar.google.es/citations?user=Zg9FdwYAAAAJ&hl=es" class="contact-item">
+                        <span class="icon">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Scholar_logo.svg"
+                                 alt="Google Scholar icon" width="22">
+                        </span>
+                        Google Scholar
+                    </a>
+                    
+                </div>
+            </div>
+        </section>
+    </main>
 
- 
- 
-    
+    <footer>
+        <p>&copy; 2025 Elena Fernandez Garcia. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 
 </html>
