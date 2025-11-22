@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@300;400;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500;1,600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -32,14 +32,23 @@
     <main>
         <section id="hero" class="hero-section">
             <div class="hero-content">
-                <h1>Elena <strong>Fernández García</strong></h1>
-                <h2 class="subtitle">PhD Student in Cosmology</h2>
-                <p class="tagline">📍Granada, Spain</p>
+                <div class="hero-text">
+                    <h1>
+                        <span class="name-first">Elena</span>
+                        <span class="name-last">Fernández García</span>
+                    </h1>
+                    <h2 class="subtitle">PhD Student in Cosmology</h2>
+                    <p class="tagline">
+                        <span class="location-icon">📍</span>
+                        <span>Granada, Spain</span>
+                    </p>
+                </div>
                 <div class="hero-buttons">
                     <a href="#publications" class="btn primary-btn">Explore Research</a>
                     <a href="#contact" class="btn secondary-btn">Get in Touch</a>
                 </div>
             </div>
+            <div class="hero-decoration"></div>
         </section>
 
         <section id="about" class="section">
@@ -53,10 +62,11 @@
                         <p>I am a PhD student in Cosmology at the Instituto de Astrofísica de Andalucía (IAA-CSIC),
                             working within the DESI collaboration. My research focuses on understanding the large-scale
                             structure of the Universe.</p>
-                        <p>I specialize in analyzing <strong>Cosmic Voids</strong> and running <strong>N-body
-                                Simulations</strong>. I am particularly interested in populating these simulations with
-                            galaxies using the <strong>SHAM (Subhalo Abundance Matching)</strong> method and exploring
-                            <strong>Conformal Transformations</strong> of the standard metric to test alternative
+                        <p>I specialize in analyzing <strong>Cosmic Voids</strong> and populating <strong>N-body
+                                Simulations</strong> with galaxies using the SubHalo Abundance Matching (SHAM) method.
+                            I've also
+                            explored <strong>conformal transformations</strong> of the standard metric to test
+                            alternative
                             cosmological models.
                         </p>
                     </div>
@@ -104,24 +114,43 @@
         <section id="publications" class="section">
             <div class="container">
                 <h2 class="section-title">Publications</h2>
+
+                <!-- Filter Controls -->
+                <div class="filter-controls">
+                    <div class="filter-group">
+                        <span class="filter-label">Year:</span>
+                        <button class="filter-btn active" data-filter-type="year" data-filter-value="all">All</button>
+                        <button class="filter-btn" data-filter-type="year" data-filter-value="2026">2026</button>
+                        <button class="filter-btn" data-filter-type="year" data-filter-value="2025">2025</button>
+                    </div>
+                    <div class="filter-group">
+                        <span class="filter-label">Topic:</span>
+                        <button class="filter-btn active" data-filter-type="topic" data-filter-value="all">All</button>
+                        <button class="filter-btn" data-filter-type="topic" data-filter-value="voids">Voids</button>
+                        <button class="filter-btn" data-filter-type="topic" data-filter-value="desi">DESI</button>
+                        <button class="filter-btn" data-filter-type="topic" data-filter-value="mocks">Mocks</button>
+                    </div>
+                </div>
+
                 <div class="publications-list-dynamic">
 
-                    <!-- Paper 1 -->
-                    <article class="pub-item"
-                        onclick="window.open('https://ui.adsabs.harvard.edu/abs/2025A&A...695A..19F', '_blank')">
-                        <div class="pub-year">2025</div>
+                    <!-- Paper 3 -->
+                    <article class="pub-item" data-year="2026" data-topics="mocks desi"
+                        onclick="window.open('https://ui.adsabs.harvard.edu/abs/2025arXiv250701593F', '_blank')">
+                        <div class="pub-year">2026</div>
                         <div class="pub-details">
-                            <h3>Constraining cosmological parameters using void statistics from the SDSS survey</h3>
+                            <h3>DESI DR2 reference mocks: clustering results from Uchuu-BGS and LRG</h3>
                             <div class="pub-meta">
-                                <span class="pub-journal">A&A</span>
+                                <span class="pub-journal">JCAP</span>
                                 <span class="authors"><strong>E. Fernández-García<strong> et al.</span>
                                 <span class="read-more">📄</span>
+
                             </div>
                         </div>
                     </article>
 
                     <!-- Paper 2 -->
-                    <article class="pub-item"
+                    <article class="pub-item" data-year="2025" data-topics="desi"
                         onclick="window.open('https://ui.adsabs.harvard.edu/abs/2025A&A...701A.237F', '_blank')">
                         <div class="pub-year">2025</div>
                         <div class="pub-details">
@@ -135,23 +164,42 @@
                         </div>
                     </article>
 
-                    <!-- Paper 3 -->
-                    <article class="pub-item"
-                        onclick="window.open('https://ui.adsabs.harvard.edu/abs/2025arXiv250701593F', '_blank')">
+
+
+
+                    <!-- Paper 1 -->
+                    <article class="pub-item" data-year="2025" data-topics="voids"
+                        onclick="window.open('https://ui.adsabs.harvard.edu/abs/2025A&A...695A..19F', '_blank')">
                         <div class="pub-year">2025</div>
                         <div class="pub-details">
-                            <h3>DESI DR2 reference mocks: clustering results from Uchuu-BGS and LRG</h3>
+                            <h3>Constraining cosmological parameters using void statistics from the SDSS survey</h3>
                             <div class="pub-meta">
-                                <span class="pub-journal">arXiv</span>
+                                <span class="pub-journal">A&A</span>
                                 <span class="authors"><strong>E. Fernández-García<strong> et al.</span>
                                 <span class="read-more">📄</span>
+                            </div>
+                        </div>
+                    </article>
 
+
+
+                    <!-- Paper 6 -->
+                    <article class="pub-item" data-year="2025" data-topics="desi"
+                        onclick="window.open('https://ui.adsabs.harvard.edu/abs/2025arXiv250314738D', '_blank')">
+                        <div class="pub-year">2025</div>
+                        <div class="pub-details">
+                            <h3>DESI DR2 Results II: Measurements of BAO and Cosmological Constraints</h3>
+                            <div class="pub-meta">
+                                <span class="pub-journal">PRD</span>
+                                <span class="authors">DESI Collaboration (incl. <strong>E.
+                                        Fernández-García<strong>)</span>
+                                <span class="read-more">📄</span>
                             </div>
                         </div>
                     </article>
 
                     <!-- Paper 4 -->
-                    <article class="pub-item"
+                    <article class="pub-item" data-year="2025" data-topics="desi"
                         onclick="window.open('https://ui.adsabs.harvard.edu/abs/2025arXiv250314745D', '_blank')">
                         <div class="pub-year">2025</div>
                         <div class="pub-details">
@@ -167,13 +215,13 @@
                     </article>
 
                     <!-- Paper 5 -->
-                    <article class="pub-item"
+                    <article class="pub-item" data-year="2025" data-topics="desi"
                         onclick="window.open('https://ui.adsabs.harvard.edu/abs/2025arXiv250314742A', '_blank')">
                         <div class="pub-year">2025</div>
                         <div class="pub-details">
                             <h3>Validation of the DESI DR2 Measurements of BAO from Galaxies and Quasars</h3>
                             <div class="pub-meta">
-                                <span class="pub-journal">arXiv</span>
+                                <span class="pub-journal">PRD</span>
                                 <span class="authors">DESI Collaboration (incl. <strong>E.
                                         Fernández-García<strong>)</span>
                                 <span class="read-more">📄</span>
@@ -182,23 +230,9 @@
 
                     </article>
 
-                    <!-- Paper 6 -->
-                    <article class="pub-item"
-                        onclick="window.open('https://ui.adsabs.harvard.edu/abs/2025arXiv250314738D', '_blank')">
-                        <div class="pub-year">2025</div>
-                        <div class="pub-details">
-                            <h3>DESI DR2 Results II: Measurements of BAO and Cosmological Constraints</h3>
-                            <div class="pub-meta">
-                                <span class="pub-journal">arXiv</span>
-                                <span class="authors">DESI Collaboration (incl. <strong>E.
-                                        Fernández-García<strong>)</span>
-                                <span class="read-more">📄</span>
-                            </div>
-                        </div>
-                    </article>
 
                     <!-- Paper 7 -->
-                    <article class="pub-item"
+                    <article class="pub-item" data-year="2025" data-topics="desi"
                         onclick="window.open('https://ui.adsabs.harvard.edu/abs/2025arXiv250809133S', '_blank')">
                         <div class="pub-year">2025</div>
                         <div class="pub-details">
@@ -213,6 +247,14 @@
                         </div>
                     </article>
 
+                </div>
+
+                <!-- Show More Button -->
+                <div class="show-more-container">
+                    <button class="show-more-btn" id="showMoreBtn">
+                        Show More Publications
+                        <span class="arrow">↓</span>
+                    </button>
                 </div>
             </div>
         </section>
