@@ -102,7 +102,7 @@ const observerOptions = {
     rootMargin: "0px 0px -50px 0px"
 };
 
-// Observer for fade-in animations
+// Observer for general fade-in animations
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -113,9 +113,29 @@ const observer = new IntersectionObserver((entries) => {
     threshold: 0.1
 });
 
-document.querySelectorAll('.section, .timeline-item, .pub-item, .skill-card').forEach((el) => {
+// Observer specifically for publication items
+const pubObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+            // Optionally unobserve after animation
+            pubObserver.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.15,
+    rootMargin: "0px 0px -100px 0px"
+});
+
+// Apply observers to different elements
+document.querySelectorAll('.section, .timeline-item, .skill-card').forEach((el) => {
     el.classList.add('fade-in-section');
     observer.observe(el);
+});
+
+// Observe publication items separately
+document.querySelectorAll('.pub-item').forEach((el) => {
+    pubObserver.observe(el);
 });
 
 // Menu Active State Observer
@@ -144,3 +164,121 @@ const sectionObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('section').forEach(section => {
     sectionObserver.observe(section);
 });
+
+// Publication Filtering and Show More Logic
+const INITIAL_VISIBLE_COUNT = 4; // Show first 4 publications initially
+let currentYearFilter = 'all';
+let currentTopicFilter = 'all';
+let showingAll = false;
+
+const pubItems = document.querySelectorAll('.pub-item');
+const showMoreBtn = document.getElementById('showMoreBtn');
+const filterBtns = document.querySelectorAll('.filter-btn');
+
+// Initialize - hide publications beyond initial count
+function initializePublications() {
+    pubItems.forEach((item, index) => {
+        if (index >= INITIAL_VISIBLE_COUNT) {
+            item.classList.add('hidden');
+        }
+    });
+    updateShowMoreButton();
+}
+
+// Filter publications based on current filters
+function filterPublications() {
+    let visibleCount = 0;
+
+    pubItems.forEach((item, index) => {
+        const itemYear = item.dataset.year;
+        const itemTopics = item.dataset.topics || '';
+
+        // Check if item matches filters
+        const yearMatch = currentYearFilter === 'all' || itemYear === currentYearFilter;
+        const topicMatch = currentTopicFilter === 'all' || itemTopics.includes(currentTopicFilter);
+
+        if (yearMatch && topicMatch) {
+            // Show if within visible count or showing all
+            if (showingAll || visibleCount < INITIAL_VISIBLE_COUNT) {
+                item.classList.remove('hidden');
+                visibleCount++;
+            } else {
+                item.classList.add('hidden');
+            }
+        } else {
+            item.classList.add('hidden');
+        }
+    });
+
+    updateShowMoreButton();
+}
+
+// Update show more button visibility
+function updateShowMoreButton() {
+    const visibleItems = Array.from(pubItems).filter(item => !item.classList.contains('hidden'));
+    const matchingItems = Array.from(pubItems).filter(item => {
+        const itemYear = item.dataset.year;
+        const itemTopics = item.dataset.topics || '';
+        const yearMatch = currentYearFilter === 'all' || itemYear === currentYearFilter;
+        const topicMatch = currentTopicFilter === 'all' || itemTopics.includes(currentTopicFilter);
+        return yearMatch && topicMatch;
+    });
+
+    // Hide button if all matching items are visible
+    if (visibleItems.length >= matchingItems.length || showingAll) {
+        showMoreBtn.classList.add('hidden');
+    } else {
+        showMoreBtn.classList.remove('hidden');
+    }
+}
+
+// Handle filter button clicks
+filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const filterType = btn.dataset.filterType;
+        const filterValue = btn.dataset.filterValue;
+
+        // Remove active class from siblings
+        document.querySelectorAll(`[data-filter-type="${filterType}"]`).forEach(b => {
+            b.classList.remove('active');
+        });
+
+        // Add active class to clicked button
+        btn.classList.add('active');
+
+        // Update current filter
+        if (filterType === 'year') {
+            currentYearFilter = filterValue;
+        } else if (filterType === 'topic') {
+            currentTopicFilter = filterValue;
+        }
+
+        // Reset show all state when filter changes
+        showingAll = false;
+
+        // Apply filters
+        filterPublications();
+    });
+});
+
+// Handle show more button click
+showMoreBtn.addEventListener('click', () => {
+    showingAll = true;
+    filterPublications();
+
+    // Smooth scroll to show newly revealed items
+    setTimeout(() => {
+        const firstHiddenIndex = Array.from(pubItems).findIndex((item, index) =>
+            index >= INITIAL_VISIBLE_COUNT && !item.classList.contains('hidden')
+        );
+        if (firstHiddenIndex !== -1) {
+            pubItems[INITIAL_VISIBLE_COUNT].scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest'
+            });
+        }
+    }, 100);
+});
+
+// Initialize on page load
+initializePublications();
