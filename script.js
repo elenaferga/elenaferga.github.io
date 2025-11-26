@@ -282,3 +282,52 @@ showMoreBtn.addEventListener('click', () => {
 
 // Initialize on page load
 initializePublications();
+
+// Contact Form AJAX Submission
+const contactForm = document.querySelector('.contact-form');
+const formStatus = document.getElementById('form-status');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(contactForm);
+        const submitBtn = contactForm.querySelector('.submit-btn');
+
+        // Disable button and show loading state
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+        formStatus.textContent = '';
+        formStatus.className = 'form-status';
+
+        try {
+            const response = await fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                // Success
+                formStatus.textContent = '✓ Message sent successfully! I\'ll get back to you soon.';
+                formStatus.classList.add('success');
+                contactForm.reset();
+            } else {
+                // Error
+                formStatus.textContent = '✗ Oops! There was a problem sending your message. Please try again.';
+                formStatus.classList.add('error');
+            }
+        } catch (error) {
+            // Network error
+            formStatus.textContent = '✗ Network error. Please check your connection and try again.';
+            formStatus.classList.add('error');
+        } finally {
+            // Re-enable button
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send Message';
+        }
+    });
+}
+
