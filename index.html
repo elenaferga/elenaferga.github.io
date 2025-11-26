@@ -18,6 +18,8 @@
 <body>
     <canvas id="cosmos-bg"></canvas>
 
+    <div class="last-updated">Last updated: November 2025</div>
+
     <nav class="navbar">
         <ul class="nav-links">
             <li><a href="#hero" class="nav-link" data-section="hero">Home</a></li>
@@ -69,6 +71,17 @@
                             alternative
                             cosmological models.
                         </p>
+
+                        <div class="keywords">
+                            <span class="keywords-label">Keywords:</span>
+                            <span class="keyword-item">Large-scale structure</span>
+                            <span class="keyword-separator">·</span>
+                            <span class="keyword-item">Cosmic voids</span>
+                            <span class="keyword-separator">·</span>
+                            <span class="keyword-item">N-body simulations</span>
+                            <span class="keyword-separator">·</span>
+                            <span class="keyword-item">SHAM</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -329,11 +342,32 @@
             <div class="container">
                 <h2 class="section-title">Contact</h2>
                 <p class="contact-intro">Interested in my research or collaboration? Feel free to reach out.</p>
+
+                <!-- Contact Form -->
+                <form action="https://formspree.io/f/xangwwol" method="POST" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Send Message</button>
+                    <div id="form-status" class="form-status"></div>
+                </form>
+
+                <!-- Social Links -->
                 <div class="contact-links">
-                    <a href="mailto:efdez@iaa.es" class="contact-item">
-                        <span class="icon">✉️</span> efdez@iaa.es
-                    </a>
-                    <a href="https://www.linkedin.com/in/elena-fernández-garcía-207aa3190/" class="contact-item">
+                    <a href="https://www.linkedin.com/in/elena-fernández-garcía-207aa3190/" class="contact-item"
+                        target="_blank" rel="noopener noreferrer">
                         <span class="icon">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
                                 alt="LinkedIn icon" width="22">
@@ -341,8 +375,8 @@
                         LinkedIn
                     </a>
 
-                    </a>
-                    <a href="https://github.com/elenaferga" class="contact-item">
+                    <a href="https://github.com/elenaferga" class="contact-item" target="_blank"
+                        rel="noopener noreferrer">
                         <span class="icon">
                             <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
                                 alt="GitHub icon" width="22">
@@ -350,14 +384,14 @@
                         GitHub
                     </a>
 
-                    <a href="https://scholar.google.es/citations?user=Zg9FdwYAAAAJ&hl=es" class="contact-item">
+                    <a href="https://scholar.google.es/citations?user=Zg9FdwYAAAAJ&hl=es" class="contact-item"
+                        target="_blank" rel="noopener noreferrer">
                         <span class="icon">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Scholar_logo.svg"
                                 alt="Google Scholar icon" width="22">
                         </span>
                         Google Scholar
                     </a>
-
                 </div>
             </div>
         </section>
