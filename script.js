@@ -4,8 +4,8 @@ const ctx = canvas.getContext('2d');
 
 let width, height;
 let particles = [];
-const numParticles = 80; // Fewer particles for minimalist look
-const connectionDistance = 150;
+const numParticles = 300; // More particles for better structure
+const connectionDistance = 120; // Shorter connections for localized filaments
 
 function resize() {
     width = window.innerWidth;
@@ -15,35 +15,65 @@ function resize() {
 }
 
 class Particle {
-    constructor() {
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.5; // Slow movement
-        this.vy = (Math.random() - 0.5) * 0.5;
-        this.size = Math.random() * 2 + 1;
+    constructor(isClustered = true) {
+        this.reset(isClustered);
+    }
+
+    reset(isClustered = true) {
+        if (isClustered && window.massCenters) {
+            // Pick a random mass center
+            const center = window.massCenters[Math.floor(Math.random() * window.massCenters.length)];
+            // Add Gaussian-ish noise to cluster around center
+            const dist = Math.pow(Math.random(), 2) * 200;
+            const angle = Math.random() * Math.PI * 2;
+            this.x = center.x + Math.cos(angle) * dist;
+            this.y = center.y + Math.sin(angle) * dist;
+        } else {
+            this.x = Math.random() * width;
+            this.y = Math.random() * height;
+        }
+
+        this.vx = (Math.random() - 0.5) * 0.2; // Even slower movement
+        this.vy = (Math.random() - 0.5) * 0.2;
+        this.size = Math.random() * 1 + 1;
     }
 
     update() {
         this.x += this.vx;
         this.y += this.vy;
 
-        // Bounce off edges
-        if (this.x < 0 || this.x > width) this.vx *= -1;
-        if (this.y < 0 || this.y > height) this.vy *= -1;
+        // Wrap around instead of bouncing for a more continuous flow
+        if (this.x < 0) this.x = width;
+        if (this.x > width) this.x = 0;
+        if (this.y < 0) this.y = height;
+        if (this.y > height) this.y = 0;
     }
 
     draw() {
         ctx.beginPath();
-        ctx.fillStyle = '#2c3e50'; // Dark grey/blue dots
+        // Slightly varying size for depth
+        const depthOpacity = 0.05 + (this.size / 2) * 0.1;
+        ctx.fillStyle = `rgba(44, 62, 80, ${depthOpacity})`;
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
     }
 }
 
 function initParticles() {
+    // Create mass centers for "Cosmic Web" effect
+    window.massCenters = [];
+    const numCenters = 12;
+    for (let i = 0; i < numCenters; i++) {
+        window.massCenters.push({
+            x: Math.random() * width,
+            y: Math.random() * height
+        });
+    }
+
     particles = [];
     for (let i = 0; i < numParticles; i++) {
-        particles.push(new Particle());
+        // 85% clustered, 15% uniform background to better define voids
+        particles.push(new Particle(Math.random() > 0.15));
     }
 }
 
@@ -54,18 +84,21 @@ function animate() {
         p.update();
         p.draw();
 
-        // Draw connections
+        // Draw connections (Cosmic Filaments)
+        // Optimization: only check a limited number of connections per particle
         for (let j = index + 1; j < particles.length; j++) {
             const p2 = particles[j];
             const dx = p.x - p2.x;
             const dy = p.y - p2.y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
+            const distSq = dx * dx + dy * dy;
 
-            if (distance < connectionDistance) {
+            if (distSq < connectionDistance * connectionDistance) {
+                const distance = Math.sqrt(distSq);
                 ctx.beginPath();
-                const opacity = 1 - (distance / connectionDistance);
-                ctx.strokeStyle = `rgba(44, 62, 80, ${opacity * 0.15})`; // Very subtle lines
-                ctx.lineWidth = 1;
+                // Even more subtle lines, fading with distance
+                const strength = Math.pow(1 - (distance / connectionDistance), 2);
+                ctx.strokeStyle = `rgba(44, 62, 80, ${strength * 0.07})`;
+                ctx.lineWidth = 0.3;
                 ctx.moveTo(p.x, p.y);
                 ctx.lineTo(p2.x, p2.y);
                 ctx.stroke();
@@ -168,7 +201,6 @@ document.querySelectorAll('section').forEach(section => {
 // Publication Filtering and Show More Logic
 const INITIAL_VISIBLE_COUNT = 4; // Show first 4 publications initially
 let currentYearFilter = 'all';
-let currentTopicFilter = 'all';
 let showingAll = false;
 
 const pubItems = document.querySelectorAll('.pub-item');
@@ -189,15 +221,13 @@ function initializePublications() {
 function filterPublications() {
     let visibleCount = 0;
 
-    pubItems.forEach((item, index) => {
+    pubItems.forEach((item) => {
         const itemYear = item.dataset.year;
-        const itemTopics = item.dataset.topics || '';
 
         // Check if item matches filters
         const yearMatch = currentYearFilter === 'all' || itemYear === currentYearFilter;
-        const topicMatch = currentTopicFilter === 'all' || itemTopics.includes(currentTopicFilter);
 
-        if (yearMatch && topicMatch) {
+        if (yearMatch) {
             // Show if within visible count or showing all
             if (showingAll || visibleCount < INITIAL_VISIBLE_COUNT) {
                 item.classList.remove('hidden');
@@ -218,10 +248,8 @@ function updateShowMoreButton() {
     const visibleItems = Array.from(pubItems).filter(item => !item.classList.contains('hidden'));
     const matchingItems = Array.from(pubItems).filter(item => {
         const itemYear = item.dataset.year;
-        const itemTopics = item.dataset.topics || '';
         const yearMatch = currentYearFilter === 'all' || itemYear === currentYearFilter;
-        const topicMatch = currentTopicFilter === 'all' || itemTopics.includes(currentTopicFilter);
-        return yearMatch && topicMatch;
+        return yearMatch;
     });
 
     // Hide button if all matching items are visible
@@ -249,8 +277,6 @@ filterBtns.forEach(btn => {
         // Update current filter
         if (filterType === 'year') {
             currentYearFilter = filterValue;
-        } else if (filterType === 'topic') {
-            currentTopicFilter = filterValue;
         }
 
         // Reset show all state when filter changes
@@ -282,6 +308,57 @@ showMoreBtn.addEventListener('click', () => {
 
 // Initialize on page load
 initializePublications();
+
+// Handle clicks inside pub-impact to prevent opening the arxiv link
+document.querySelectorAll('.pub-impact').forEach(impact => {
+    impact.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+});
+
+// News PDF Modal functions
+function openNewsModal(url) {
+    const modal = document.getElementById('news-modal');
+    const iframe = document.getElementById('modal-iframe');
+    if (modal && iframe) {
+        iframe.src = url;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent background scroll
+    }
+}
+
+function closeNewsModal() {
+    const modal = document.getElementById('news-modal');
+    const iframe = document.getElementById('modal-iframe');
+    if (modal && iframe) {
+        modal.classList.remove('active');
+        iframe.src = '';
+        document.body.style.overflow = ''; // Restore background scroll
+    }
+}
+
+// Close modal on escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeNewsModal();
+    }
+});
+
+// Toggle Impact Section Visibility
+function toggleImpact(event, btn) {
+    event.stopPropagation();
+    const impactSection = btn.closest('.pub-content').querySelector('.collapsible-impact');
+    impactSection.classList.toggle('show');
+    btn.classList.toggle('active');
+
+    // Smooth text update
+    const text = btn.querySelector('span');
+    if (impactSection.classList.contains('show')) {
+        text.textContent = 'Hide Media & Impact';
+    } else {
+        text.textContent = 'View Media & Impact';
+    }
+}
 
 // Contact Form AJAX Submission
 const contactForm = document.querySelector('.contact-form');
