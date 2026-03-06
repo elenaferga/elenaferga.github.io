@@ -12,13 +12,14 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500;1,600&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <canvas id="cosmos-bg"></canvas>
 
-    <div class="last-updated">Last updated: December 2025</div>
+    <div class="last-updated">Last updated: March 2026</div>
 
     <nav class="navbar">
         <ul class="nav-links">
@@ -27,6 +28,8 @@
             <li><a href="#timeline" class="nav-link" data-section="timeline">Trajectory</a></li>
             <li><a href="#publications" class="nav-link" data-section="publications">Publications</a></li>
             <li><a href="#skills" class="nav-link" data-section="skills">Skills</a></li>
+            <li><a href="#outreach" class="nav-link" data-section="outreach">Outreach</a></li>
+            <li><a href="#media" class="nav-link" data-section="media">Media</a></li>
             <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
         </ul>
     </nav>
@@ -55,21 +58,21 @@
 
         <section id="about" class="section">
             <div class="container">
-                <h2 class="section-title">About Me</h2>
-                <div class="about-content">
-                    <div class="about-image">
-                        <img src="elena.jpeg" alt="Elena Fernandez Garcia" class="profile-img">
+                <div class="about-standard-layout">
+                    <div class="about-photo-col">
+                        <div class="profile-circle-frame">
+                            <img src="elena.jpeg" alt="Elena Fernandez Garcia">
+                        </div>
                     </div>
-                    <div class="about-text">
-                        <p>I am a PhD student in Cosmology at the Instituto de Astrofísica de Andalucía (IAA-CSIC),
-                            working within the DESI collaboration. My research focuses on understanding the large-scale
+                    <div class="about-text-col">
+                        <h2 class="section-title">About Me</h2>
+                        <p class="bio-main">I am a PhD student in Cosmology at the <strong>Instituto de Astrofísica de
+                                Andalucía (IAA-CSIC)</strong>,
+                            working within the <strong>DESI collaboration</strong>. My research focuses on understanding
+                            the large-scale
                             structure of the Universe.</p>
                         <p>I specialize in analyzing <strong>Cosmic Voids</strong> and populating <strong>N-body
                                 Simulations</strong> with galaxies using the SubHalo Abundance Matching (SHAM) method.
-                            I've also
-                            explored <strong>conformal transformations</strong> of the standard metric to test
-                            alternative
-                            cosmological models.
                         </p>
 
                         <div class="keywords">
@@ -79,8 +82,6 @@
                             <span class="keyword-item">Cosmic voids</span>
                             <span class="keyword-separator">·</span>
                             <span class="keyword-item">N-body simulations</span>
-                            <span class="keyword-separator">·</span>
-                            <span class="keyword-item">SHAM</span>
                         </div>
                     </div>
                 </div>
@@ -131,17 +132,10 @@
                 <!-- Filter Controls -->
                 <div class="filter-controls">
                     <div class="filter-group">
-                        <span class="filter-label">Year:</span>
+                        <span class="filter-label">Filter by Year:</span>
                         <button class="filter-btn active" data-filter-type="year" data-filter-value="all">All</button>
                         <button class="filter-btn" data-filter-type="year" data-filter-value="2026">2026</button>
                         <button class="filter-btn" data-filter-type="year" data-filter-value="2025">2025</button>
-                    </div>
-                    <div class="filter-group">
-                        <span class="filter-label">Topic:</span>
-                        <button class="filter-btn active" data-filter-type="topic" data-filter-value="all">All</button>
-                        <button class="filter-btn" data-filter-type="topic" data-filter-value="voids">Voids</button>
-                        <button class="filter-btn" data-filter-type="topic" data-filter-value="desi">DESI</button>
-                        <button class="filter-btn" data-filter-type="topic" data-filter-value="mocks">Mocks</button>
                     </div>
                 </div>
 
@@ -150,128 +144,120 @@
                     <!-- Paper New (Dec 2025) -->
                     <article class="pub-item" data-year="2026" data-topics=""
                         onclick="window.open('https://arxiv.org/abs/2512.05847', '_blank')">
-                        <div class="pub-year">2026</div>
-                        <div class="pub-details">
-                            <h3>A redshift-independent theoretical halo mass function validated with the Uchuu
-                                simulations</h3>
-                            <div class="pub-meta">
-                                <span class="pub-journal">arXiv</span>
-                                <span class="authors"><strong>E. Fernández-García</strong> et al.</span>
-                                <span class="read-more">📄</span>
+                        <div class="pub-index">01</div>
+                        <div class="pub-content">
+                            <div class="pub-header">
+                                <span class="pub-journal">A&A</span>
+                                <span class="pub-year">2026</span>
                             </div>
+                            <h3 class="pub-title">A redshift-independent theoretical halo mass function validated with
+                                the Uchuu simulations</h3>
+                            <p class="pub-authors"><strong>E. Fernández-García</strong>, et al.</p>
+
                         </div>
                     </article>
 
                     <!-- Paper 3 -->
                     <article class="pub-item" data-year="2026" data-topics="mocks desi"
                         onclick="window.open('https://ui.adsabs.harvard.edu/abs/2025arXiv250701593F', '_blank')">
-                        <div class="pub-year">2026</div>
-                        <div class="pub-details">
-                            <h3>DESI DR2 reference mocks: clustering results from Uchuu-BGS and LRG</h3>
-                            <div class="pub-meta">
+                        <div class="pub-index">02</div>
+                        <div class="pub-content">
+                            <div class="pub-header">
                                 <span class="pub-journal">JCAP</span>
-                                <span class="authors"><strong>E. Fernández-García<strong> et al.</span>
-                                <span class="read-more">📄</span>
-
+                                <span class="pub-year">2026</span>
                             </div>
+                            <h3 class="pub-title">DESI DR2 reference mocks: clustering results from Uchuu-BGS and LRG
+                            </h3>
+                            <p class="pub-authors"><strong>E. Fernández-García</strong>, et al.</p>
                         </div>
                     </article>
 
                     <!-- Paper 2 -->
                     <article class="pub-item" data-year="2025" data-topics="desi"
                         onclick="window.open('https://ui.adsabs.harvard.edu/abs/2025A&A...701A.237F', '_blank')">
-                        <div class="pub-year">2025</div>
-                        <div class="pub-details">
-                            <h3>Missing components in ΛCDM from DESI Y1 BAO measurements: Insights from redshift
-                                remapping</h3>
-                            <div class="pub-meta">
+                        <div class="pub-index">03</div>
+                        <div class="pub-content">
+                            <div class="pub-header">
                                 <span class="pub-journal">A&A</span>
-                                <span class="authors"><strong>E. Fernández-García<strong> et al.</span>
-                                <span class="read-more">📄</span>
+                                <span class="pub-year">2025</span>
                             </div>
+                            <h3 class="pub-title">Missing components in ΛCDM from DESI Y1 BAO measurements: Insights
+                                from redshift remapping</h3>
+                            <p class="pub-authors"><strong>E. Fernández-García</strong>, et al.</p>
                         </div>
                     </article>
-
-
-
 
                     <!-- Paper 1 -->
                     <article class="pub-item" data-year="2025" data-topics="voids"
                         onclick="window.open('https://ui.adsabs.harvard.edu/abs/2025A&A...695A..19F', '_blank')">
-                        <div class="pub-year">2025</div>
-                        <div class="pub-details">
-                            <h3>Constraining cosmological parameters using void statistics from the SDSS survey</h3>
-                            <div class="pub-meta">
+                        <div class="pub-index">04</div>
+                        <div class="pub-content">
+                            <div class="pub-header">
                                 <span class="pub-journal">A&A</span>
-                                <span class="authors"><strong>E. Fernández-García<strong> et al.</span>
-                                <span class="read-more">📄</span>
+                                <span class="pub-year">2025</span>
                             </div>
+                            <h3 class="pub-title">Constraining cosmological parameters using void statistics from the
+                                SDSS survey</h3>
+                            <p class="pub-authors"><strong>E. Fernández-García</strong>, et al.</p>
                         </div>
                     </article>
-
-
 
                     <!-- Paper 6 -->
                     <article class="pub-item" data-year="2025" data-topics="desi"
                         onclick="window.open('https://ui.adsabs.harvard.edu/abs/2025arXiv250314738D', '_blank')">
-                        <div class="pub-year">2025</div>
-                        <div class="pub-details">
-                            <h3>DESI DR2 Results II: Measurements of BAO and Cosmological Constraints</h3>
-                            <div class="pub-meta">
+                        <div class="pub-index">05</div>
+                        <div class="pub-content">
+                            <div class="pub-header">
                                 <span class="pub-journal">PRD</span>
-                                <span class="authors">DESI Collaboration (incl. <strong>E.
-                                        Fernández-García<strong>)</span>
-                                <span class="read-more">📄</span>
+                                <span class="pub-year">2025</span>
                             </div>
+                            <h3 class="pub-title">DESI DR2 Results II: Measurements of BAO and Cosmological Constraints
+                            </h3>
+                            <p class="pub-authors">DESI Collaboration (incl. <strong>E. Fernández-García</strong>)</p>
                         </div>
                     </article>
 
                     <!-- Paper 4 -->
                     <article class="pub-item" data-year="2025" data-topics="desi"
                         onclick="window.open('https://ui.adsabs.harvard.edu/abs/2025arXiv250314745D', '_blank')">
-                        <div class="pub-year">2025</div>
-                        <div class="pub-details">
-                            <h3>Data Release 1 of the Dark Energy Spectroscopic Instrument</h3>
-                            <div class="pub-meta">
+                        <div class="pub-index">06</div>
+                        <div class="pub-content">
+                            <div class="pub-header">
                                 <span class="pub-journal">arXiv</span>
-                                <span class="authors">DESI Collaboration (incl. <strong>E.
-                                        Fernández-García<strong>)</span>
-                                <span class="read-more">📄</span>
+                                <span class="pub-year">2025</span>
                             </div>
+                            <h3 class="pub-title">Data Release 1 of the Dark Energy Spectroscopic Instrument</h3>
+                            <p class="pub-authors">DESI Collaboration (incl. <strong>E. Fernández-García</strong>)</p>
                         </div>
-
                     </article>
 
                     <!-- Paper 5 -->
                     <article class="pub-item" data-year="2025" data-topics="desi"
                         onclick="window.open('https://ui.adsabs.harvard.edu/abs/2025arXiv250314742A', '_blank')">
-                        <div class="pub-year">2025</div>
-                        <div class="pub-details">
-                            <h3>Validation of the DESI DR2 Measurements of BAO from Galaxies and Quasars</h3>
-                            <div class="pub-meta">
+                        <div class="pub-index">07</div>
+                        <div class="pub-content">
+                            <div class="pub-header">
                                 <span class="pub-journal">PRD</span>
-                                <span class="authors">DESI Collaboration (incl. <strong>E.
-                                        Fernández-García<strong>)</span>
-                                <span class="read-more">📄</span>
+                                <span class="pub-year">2025</span>
                             </div>
+                            <h3 class="pub-title">Validation of the DESI DR2 Measurements of BAO from Galaxies and
+                                Quasars</h3>
+                            <p class="pub-authors">DESI Collaboration (incl. <strong>E. Fernández-García</strong>)</p>
                         </div>
-
                     </article>
-
 
                     <!-- Paper 7 -->
                     <article class="pub-item" data-year="2025" data-topics="desi"
                         onclick="window.open('https://ui.adsabs.harvard.edu/abs/2025arXiv250809133S', '_blank')">
-                        <div class="pub-year">2025</div>
-                        <div class="pub-details">
-                            <h3>Measurement of Parity-Violating Modes of the DESI Y1 LRG 4-Point Correlation Function
-                            </h3>
-                            <div class="pub-meta">
+                        <div class="pub-index">08</div>
+                        <div class="pub-content">
+                            <div class="pub-header">
                                 <span class="pub-journal">arXiv</span>
-                                <span class="authors">Z. Slepian et al. (incl. <strong>E.
-                                        Fernández-García<strong>)</span>
-                                <span class="read-more">📄</span>
+                                <span class="pub-year">2025</span>
                             </div>
+                            <h3 class="pub-title">Measurement of Parity-Violating Modes of the DESI Y1 LRG 4-Point
+                                Correlation Function</h3>
+                            <p class="pub-authors">Z. Slepian et al. (incl. <strong>E. Fernández-García</strong>)</p>
                         </div>
                     </article>
 
@@ -352,6 +338,98 @@
 
         </section>
 
+        <!-- Outreach Section -->
+        <section id="outreach" class="section">
+            <div class="container">
+                <h2 class="section-title">Scientific Outreach</h2>
+                <div class="outreach-grid">
+                    <article class="outreach-card">
+                        <div class="outreach-content">
+                            <span class="outreach-type">Article · IAA-CSIC</span>
+                            <h3>Observar y simular el universo: el papel de DESI en el estudio de la energía oscura</h3>
+                            <p>An exploration of how the Dark Energy Spectroscopic Instrument (DESI) combines
+                                observation and simulation to unravel the mysteries of dark energy and cosmic structure.
+                            </p>
+                            <a href="https://www.iaa.csic.es/reportajes/observar-y-simular-el-universo-el-papel-de-desi-en-el-estudio-de-la-energia-oscura/"
+                                target="_blank" class="outreach-link">
+                                Read Article <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Placeholder card for future content -->
+                    <div class="outreach-placeholder-card">
+                        <div class="placeholder-icon"><i class="fas fa-plus"></i></div>
+                        <p>More outreach projects coming soon...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Media Coverage Section -->
+        <section id="media" class="section">
+            <div class="container">
+                <h2 class="section-title">Media Recognition</h2>
+                <div class="media-impact-full section-card">
+                    <div class="media-grid-v2">
+                        <div class="media-links-column">
+                            <h3 class="column-title"><i class="fas fa-newspaper"></i> Press & Interviews</h3>
+                            <div class="media-links-list">
+                                <a href="https://www.iaa.csic.es/noticia/un-nuevo-gps-cosmico-revela-el-mapa-invisible-mas-preciso-del-universo/"
+                                    target="_blank" class="press-item">
+                                    <div class="press-meta">IAA-CSIC · Official Release</div>
+                                    <div class="press-title">Un nuevo GPS cósmico revela el mapa invisible más preciso
+                                        del Universo</div>
+                                </a>
+                                <a href="https://www.lasexta.com/tecnologia-tecnoxplora/sinc/asi-gps-cosmico-que-puede-cartografiar-materia-oscura-cosmos_2026030369a6e9702f00a04688335ff9.html"
+                                    target="_blank" class="press-item">
+                                    <div class="press-meta">LaSexta / SINC</div>
+                                    <div class="press-title">El GPS cósmico que puede cartografiar la materia oscura del
+                                        cosmos</div>
+                                </a>
+                                <a href="https://www.elespanol.com/ciencia/20260302/cosmologos-espanoles-elaboran-gps-materia-oscura-preciso-desviaciones-anteriores/1003744151699_0.html"
+                                    target="_blank" class="press-item">
+                                    <div class="press-meta">El Español</div>
+                                    <div class="press-title">Cosmólogos españoles elaboran el GPS de materia oscura más
+                                        preciso</div>
+                                </a>
+                                <a href="https://www.cope.es/emisoras/andalucia/granada-provincia/granada/noticias/nuevo-gps-cosmico-revela-mapa-invisible-preciso-universo-20260303_3318471.html"
+                                    target="_blank" class="press-item">
+                                    <div class="press-meta">COPE Granada</div>
+                                    <div class="press-title">Entrevista: El mapa invisible más preciso del universo
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="media-gallery-column">
+                            <h3 class="column-title"><i class="fas fa-play-circle"></i> Multimedia</h3>
+                            <div class="multimedia-container">
+                                <div class="video-container">
+                                    <video controls preload="metadata" playsinline>
+                                        <source src="DECLARACIÓN ELENA.mp4#t=0.001" type="video/mp4">
+                                    </video>
+                                    <span class="video-label">Scientific Declaration</span>
+                                </div>
+                                <div class="paper-preview-container">
+                                    <div class="newspaper-window">
+                                        <img src="icon_paper.png" alt="Newspaper Feature" class="newspaper-preview-img">
+                                        <div class="window-overlay">
+                                            <a href="javascript:void(0)"
+                                                onclick="openNewsModal('ELENA%20FERNANDEZ%20GPS%20050326.pdf')"
+                                                class="btn-preview-link">
+                                                <i class="fas fa-search-plus"></i> Read Newspaper
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <span class="video-label">Featured in La Voz de Almería</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Contact Section -->
         <section id="contact" class="section">
             <div class="container">
@@ -413,8 +491,26 @@
     </main>
 
     <footer>
-        <p>&copy; 2025 Elena Fernandez Garcia. All rights reserved.</p>
+        <p>&copy; 2026 Elena Fernandez Garcia. All rights reserved.</p>
     </footer>
+
+    <!-- News PDF Modal -->
+    <div id="news-modal" class="pdf-modal">
+        <div class="modal-overlay" onclick="closeNewsModal()"></div>
+        <div class="modal-container">
+            <button class="modal-close" onclick="closeNewsModal()" title="Close Viewer">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-content">
+                <iframe id="modal-iframe" src="" frameborder="0"></iframe>
+            </div>
+            <div class="modal-footer">
+                <a href="ELENA%20FERNANDEZ%20GPS%20050326.pdf" download class="modal-download">
+                    <i class="fas fa-download"></i> Download Full Paper
+                </a>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
